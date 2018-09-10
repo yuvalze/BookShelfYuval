@@ -1,6 +1,6 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import BookShelf from './BookShelf'
+import CurrentlyRead from './CurrentlyRead'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -12,21 +12,21 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: []
+    booksInfo: []
   }
 
   componentDidMount() {
     BooksAPI.getAll()
-      .then((books) => {
+      .then((booksInfo) => {
         this.setState(() => ({
-          books
+          booksInfo
         }))
       })
   }
 
   render() {
     console.log('books');
-    console.log(this.state.books);
+    console.log(this.state.booksInfo);
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf/>
+                <CurrentlyRead/>
               </div>
               <div>
                 <div className="bookshelf">
