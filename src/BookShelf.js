@@ -9,13 +9,12 @@ export default class BooksShelf extends React.Component {
       <div className="bookshelf-books">
         <ol className="books-grid">
         {(this.props.booksArr || []).map((oneBook, index) => 
-          <li>
+          <li  key={index}>
             <BookItem 
-              key = {index}
               imageLink = {oneBook.imageLinks.thumbnail}
               author = {oneBook.authors[0]}
               title = {oneBook.title}/>
-        </li>)}
+          </li>)}
         </ol>
       </div>
       )
