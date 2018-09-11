@@ -12,3 +12,7 @@ export default class MyReads extends React.Component {
         )
       }
 }
+
+MyReads.propType = {
+  booksArr : PropTypes.array.isRequired
+}

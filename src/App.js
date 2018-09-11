@@ -12,21 +12,21 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    booksInfo: []
+    allBooks: []
   }
 
   componentDidMount() {
     BooksAPI.getAll()
-      .then((booksInfo) => {
+      .then((allBooks) => {
         this.setState(() => ({
-          booksInfo
+          allBooks
         }))
       })
   }
 
   render() {
     console.log('books');
-    console.log(this.state.booksInfo);
+    console.log(this.state.allBooks);
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <CurrentlyRead/>
+                 <CurrentlyRead booksArr={(this.state.allBooks || []).filter(oneBookFilter => oneBookFilter.shelf === 'currentlyReading')}/>
               </div>
               <div>
                 <div className="bookshelf">

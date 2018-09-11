@@ -8,19 +8,23 @@ export default class BookItem extends React.Component {
         bookShelf : 'none'
     };
     render() {
+        console.log('BookItem props');
+        console.log(this.props);
         return (
         <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.bookUrl})` }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.imageLink})` }}></div>
           <BookControl setBookShelf={()=>{}}/>
         </div>
-        <div className="book-title">To Kill a Mockingbird</div>
-        <div className="book-authors">Harper Lee</div>
+        <div className="book-title">{this.props.title}</div>
+        <div className="book-authors">{this.props.author}</div>
         </div>
         )
     }
 }
 
 BookItem.propType = {
-    bookUrl : PropTypes.string.isRequired
+    imageLink : PropTypes.string.isRequired,
+    author : PropTypes.string.isRequired,
+    title : PropTypes.string.isRequired
 }
