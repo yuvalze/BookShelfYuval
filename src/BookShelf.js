@@ -9,7 +9,7 @@ export default class BooksShelf extends React.Component {
       <div className="bookshelf-books">
         <ol className="books-grid">
         {(this.props.booksArr || []).map((oneBook, index) => 
-          <li  key={index}>
+          <li key={index}>
             <BookItem 
               imageLink = {oneBook.imageLinks.thumbnail}
               author = {oneBook.authors[0]}
