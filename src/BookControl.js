@@ -2,14 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
 
-export default class BookControl extends React.Component {
-    onOptionChanged() {
-        this.props.setBookShelf();
-    }
-    render () {
+export default function BookControl (props) {
+        console.log('BookControl props');
+        console.log(props);
         return (     
         <div className="book-shelf-changer">
-            <select>
+            <select value={props.shelfValue} onChange={props.updateBookShelf}>
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
@@ -18,9 +16,9 @@ export default class BookControl extends React.Component {
             </select>
         </div>
         )
-  }
-}
+    }
 
 BookControl.propType = {
-    setBookShelf : PropTypes.func.isRequired
+    updateBookShelf : PropTypes.func.isRequired,
+    shelfValue : PropTypes.string.isRequired
 }

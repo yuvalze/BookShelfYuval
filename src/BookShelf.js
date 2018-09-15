@@ -5,15 +5,15 @@ import './App.css'
 
 export default class BooksShelf extends React.Component {
     render () {
+      console.log('BooksShelf props');
+      console.log(this.props);
       return (
       <div className="bookshelf-books">
         <ol className="books-grid">
         {(this.props.booksArr || []).map((oneBook, index) => 
           <li key={index}>
             <BookItem 
-              imageLink = {oneBook.imageLinks.thumbnail}
-              author = {oneBook.authors[0]}
-              title = {oneBook.title}/>
+              oneBookObjData = {oneBook}/>
           </li>)}
         </ol>
       </div>
