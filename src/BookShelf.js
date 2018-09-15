@@ -13,7 +13,8 @@ export default class BooksShelf extends React.Component {
         {(this.props.booksArr || []).map((oneBook, index) => 
           <li key={index}>
             <BookItem 
-              oneBookObjData = {oneBook}/>
+              oneBookObjData = {oneBook}
+              updateBookShelf={this.props.updateBookShelf}/>
           </li>)}
         </ol>
       </div>
@@ -22,5 +23,6 @@ export default class BooksShelf extends React.Component {
 }
 
 BooksShelf.propType = {
-  booksArr : PropTypes.array.isRequired
+  booksArr : PropTypes.array.isRequired,
+  updateBookShelf : PropTypes.func.isRequired
 }

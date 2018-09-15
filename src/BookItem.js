@@ -12,11 +12,8 @@ export default class BookItem extends React.Component {
     }
 
     updateBookShelfControl(event) {
-        BooksAPI.update(this.props.oneBookObjData, event.target.value).then(res => {
-            console.log('updateBookShelfControl result');
-            console.log(res);
-        });
-    }
+        this.props.updateBookShelf(this.props.oneBookObjData, event.target.value);
+    };
     
     render() {
         console.log('BookItem props');
@@ -26,7 +23,7 @@ export default class BookItem extends React.Component {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.oneBookObjData.imageLinks.thumbnail})` }}></div>
           <BookControl 
-            updateBookShelf = {this.updateBookShelfControl} 
+            updateBookShelfControl = {this.updateBookShelfControl} 
             shelfValue = {this.props.oneBookObjData.shelf}/>
         </div>
         <div className="book-title">{this.props.oneBookObjData.title}</div>

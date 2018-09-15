@@ -5,16 +5,20 @@ import './App.css'
 
 export default class WantToRead extends React.Component {
     render () {
+      console.log('WantToRead props=');
+      console.log(this.props.booksArr);
         return (
         <div className="bookshelf">
           <h2 className="bookshelf-title">Want to Read</h2>
           <BookShelf 
-            booksArr={this.props.booksArr}/>
+            booksArr={this.props.booksArr}
+            updateBookShelf={this.props.updateBookShelf}/>
         </div>
         )
       }
 }
 
 WantToRead.propType = {
-  booksArr : PropTypes.array.isRequired
+  booksArr : PropTypes.array.isRequired,
+  updateBookShelf : PropTypes.func.isRequired
 }

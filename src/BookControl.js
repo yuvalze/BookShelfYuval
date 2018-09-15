@@ -7,7 +7,7 @@ export default function BookControl (props) {
         console.log(props);
         return (     
         <div className="book-shelf-changer">
-            <select value={props.shelfValue} onChange={props.updateBookShelf}>
+            <select value={props.shelfValue} onChange={props.updateBookShelfControl}>
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
@@ -19,6 +19,6 @@ export default function BookControl (props) {
     }
 
 BookControl.propType = {
-    updateBookShelf : PropTypes.func.isRequired,
+    updateBookShelfControl : PropTypes.func.isRequired,
     shelfValue : PropTypes.string.isRequired
 }

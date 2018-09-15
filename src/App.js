@@ -9,23 +9,31 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false,
     allBooks: []
+  }
+
+  constructor() {
+    super();
+    this.updateBookShelf = this.updateBookShelf.bind(this);
   }
 
   componentDidMount() {
     BooksAPI.getAll()
-      .then((allBooks) => {
+      .then(allBooks => {
         this.setState(() => ({
           allBooks
-        }))
+        }));
       })
+  }
+
+  updateBookShelf(oneBookObjData, shelfValue) {
+    BooksAPI.update(oneBookObjData, shelfValue).then(() =>
+      BooksAPI.getAll().then(allBooks => {
+        this.setState(() => ({
+          allBooks
+        }));
+      })
+    )
   }
 
   render() {
@@ -42,13 +50,19 @@ class BooksApp extends React.Component {
                 </div>
                 <div className="list-books-content">
                   <div>
-                      <CurrentlyRead booksArr={(this.state.allBooks || []).filter(oneBookFilter => oneBookFilter.shelf === 'currentlyReading')}/>
+                      <CurrentlyRead 
+                        booksArr={(this.state.allBooks || []).filter(oneBookFilter => oneBookFilter.shelf === 'currentlyReading')}
+                        updateBookShelf={this.updateBookShelf}/>
                   </div>
                   <div>
-                      <WantToRead booksArr={(this.state.allBooks || []).filter(oneBookFilter => oneBookFilter.shelf === 'wantToRead')}/>
+                      <WantToRead 
+                        booksArr={(this.state.allBooks || []).filter(oneBookFilter => oneBookFilter.shelf === 'wantToRead')}
+                        updateBookShelf={this.updateBookShelf}/>
                   </div>
                   <div>
-                      <Read booksArr={(this.state.allBooks || []).filter(oneBookFilter => oneBookFilter.shelf === 'read')}/>
+                      <Read 
+                        booksArr={(this.state.allBooks || []).filter(oneBookFilter => oneBookFilter.shelf === 'read')}
+                        updateBookShelf={this.updateBookShelf}/>
                   </div>
                 </div>
                 <div className="open-search">

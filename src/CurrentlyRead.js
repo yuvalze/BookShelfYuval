@@ -11,12 +11,14 @@ export default class CurrentlyRead extends React.Component {
         <div className="bookshelf">
           <h2 className="bookshelf-title">Currently Reading</h2>
           <BookShelf 
-          booksArr={this.props.booksArr}/>
+            booksArr={this.props.booksArr}
+            updateBookShelf={this.props.updateBookShelf}/>
         </div>
         )
       }
 }
 
 CurrentlyRead.propType = {
-  booksArr : PropTypes.array.isRequired
+  booksArr : PropTypes.array.isRequired,
+  updateBookShelf : PropTypes.func.isRequired
 }
