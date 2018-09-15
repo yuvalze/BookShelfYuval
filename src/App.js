@@ -1,12 +1,11 @@
 import React from 'react'
-import { Link, Route, Router } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import CurrentlyRead from './CurrentlyRead'
 import WantToRead from './WantToRead'
 import Read from './Read'
 import Search from './Search'
 import './App.css'
-import createBrowserHistory from 'history/createBrowserHistory'
 
 class BooksApp extends React.Component {
   state = {
@@ -32,10 +31,8 @@ class BooksApp extends React.Component {
   render() {
     console.log('books');
     console.log(this.state.allBooks);
-    const history = createBrowserHistory()
     return (
       <div className="app">
-        <Router history={history}>
           <div>
             <Route exact path="/search" component={Search}/>
             <Route exact path="/" render={() => (
@@ -60,7 +57,6 @@ class BooksApp extends React.Component {
               </div>
             )}/>
           </div>
-        </Router>
       </div>
     )
   }
