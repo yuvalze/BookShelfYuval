@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import './App.css'
 
 export default function BookControl (props) {
-        console.log('BookControl props');
-        console.log(props);
         return (     
         <div className="book-shelf-changer">
             <select value={props.shelfValue} onChange={props.updateBookShelfControl}>

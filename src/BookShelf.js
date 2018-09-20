@@ -10,7 +10,8 @@ export default class BooksShelf extends React.Component {
       return (
       <div className="bookshelf-books">
         <ol className="books-grid">
-        {(this.props.booksArr || []).map((oneBook, index) => 
+        {Array.isArray(this.props.booksArr) &&
+        (this.props.booksArr).map((oneBook, index) => 
           <li key={index}>
             <BookItem 
               oneBookObjData = {oneBook}

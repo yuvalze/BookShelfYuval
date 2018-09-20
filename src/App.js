@@ -23,7 +23,7 @@ class BooksApp extends React.Component {
         this.setState(() => ({
           allBooks
         }));
-      })
+      });
   }
 
   updateBookShelf(oneBookObjData, shelfValue) {
@@ -37,12 +37,12 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    console.log('books');
-    console.log(this.state.allBooks);
     return (
       <div className="app">
           <div>
-            <Route exact path="/search" component={Search}/>
+            <Route exact path="/search" 
+              component={Search}
+              updateBookShelf = {this.updateBookShelf}/>
             <Route exact path="/" render={() => (
               <div className="list-books">
                 <div className="list-books-title">

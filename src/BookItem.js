@@ -27,7 +27,7 @@ export default class BookItem extends React.Component {
             shelfValue = {this.props.oneBookObjData.shelf}/>
         </div>
         <div className="book-title">{this.props.oneBookObjData.title}</div>
-        <div className="book-authors">{this.props.oneBookObjData.authors[0]}</div>
+        <div className="book-authors">{(this.props.oneBookObjData.authors || ['']) [0]}</div>
         </div>
         )
     }
