@@ -5,8 +5,6 @@ import './App.css'
 
 export default class CurrentlyRead extends React.Component {  
     render () {
-      console.log('CurrentlyRead booksArr=');
-      console.log(this.props.booksArr);
         return (
         <div className="bookshelf">
           <h2 className="bookshelf-title">Currently Reading</h2>

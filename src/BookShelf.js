@@ -5,8 +5,6 @@ import './App.css'
 
 export default class BooksShelf extends React.Component {
     render () {
-      console.log('BooksShelf props');
-      console.log(this.props);
       return (
       <div className="bookshelf-books">
         <ol className="books-grid">

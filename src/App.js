@@ -15,6 +15,7 @@ class BooksApp extends React.Component {
   constructor() {
     super();
     this.updateBookShelf = this.updateBookShelf.bind(this);
+    console.log('App constructor');
   }
 
   componentDidMount() {

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import BookControl from './BookControl'
-import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 export default class BookItem extends React.Component {
@@ -16,18 +15,18 @@ export default class BookItem extends React.Component {
     };
     
     render() {
-        console.log('BookItem props');
-        console.log(this.props);
+        const backgroundImageUrl = (this.props.oneBookObjData.imageLinks||{}).thumbnail;
+        const backgroundImageValue = backgroundImageUrl ? `url(${this.props.oneBookObjData.imageLinks.thumbnail})` : undefined;
         return (
         <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.oneBookObjData.imageLinks.thumbnail})` }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: backgroundImageValue}}></div>
           <BookControl 
             updateBookShelfControl = {this.updateBookShelfControl} 
             shelfValue = {this.props.oneBookObjData.shelf}/>
         </div>
         <div className="book-title">{this.props.oneBookObjData.title}</div>
-        <div className="book-authors">{(this.props.oneBookObjData.authors || ['']) [0]}</div>
+        <div className="book-authors">{(this.props.oneBookObjData.authors || [''])[0]}</div>
         </div>
         )
     }

@@ -11,18 +11,32 @@ export default class Search extends React.Component {
         searchBooks : []
     }
 
+    constructor() {
+        super();
+        console.log('Search constructor');
+    }
+    
     componentDidUpdate(prevProps, prevState) {
         if (prevState.textQuery !== this.state.textQuery) {
-            BooksAPI.search(this.state.textQuery)
-            .then(searchBooks => {
-              this.setState(() => ({
-                searchBooks
-              }));
-            });
+            if (!this.state.textQuery) {
+                this.setState(() => ({
+                    searchBooks : []
+                  }));
+            }
+            else {
+                BooksAPI.search(this.state.textQuery)
+                .then(searchBooks => {
+                this.setState(() => ({
+                    searchBooks
+                }));
+                });
+            }
         }
     }
 
     render() {
+        console.log('Search state');
+        console.log(this.state);
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -38,6 +52,7 @@ export default class Search extends React.Component {
                     */}
                         <input 
                             type="text" 
+                            value={this.state.textQuery}
                             placeholder="Search by title or author"
                             onChange={event => {
                                 this.setState({textQuery : event.target.value})

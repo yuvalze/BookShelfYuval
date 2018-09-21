@@ -5,8 +5,6 @@ import './App.css'
 
 export default class WantToRead extends React.Component {
     render () {
-      console.log('WantToRead props=');
-      console.log(this.props.booksArr);
         return (
         <div className="bookshelf">
           <h2 className="bookshelf-title">Want to Read</h2>

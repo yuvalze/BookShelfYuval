@@ -5,8 +5,6 @@ import './App.css'
 
 export default class Read extends React.Component {
     render () {
-        console.log('Read booksArr=');
-        console.log(this.props.booksArr);
           return (
           <div className="bookshelf">
             <h2 className="bookshelf-title">Read</h2>
