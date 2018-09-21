@@ -19,17 +19,22 @@ export default class Search extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevState.textQuery !== this.state.textQuery) {
             if (!this.state.textQuery) {
-                this.setState(() => ({
-                    searchBooks : []
-                  }));
+                this.setState(() => (
+                    {searchBooks : []}
+                ));
             }
             else {
                 BooksAPI.search(this.state.textQuery)
                 .then(searchBooks => {
-                this.setState(() => ({
-                    searchBooks
-                }));
-                });
+                    this.setState(() => (
+                        {searchBooks}
+                    ));
+                }).catch(() => {
+                    console.log('search catch');
+                    this.setState(() => (
+                        {searchBooks : []}
+                    ));
+                })
             }
         }
     }
