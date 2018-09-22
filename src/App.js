@@ -38,8 +38,6 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    console.log('BooksApp allBooks');
-    console.log(this.state.allBooks);
     return (
       <div className="app">
           <div>

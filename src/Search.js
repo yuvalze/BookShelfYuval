@@ -27,9 +27,17 @@ export default class Search extends React.Component {
             else {
                 BooksAPI.search(this.state.textQuery)
                 .then(searchBooks => {
-                    this.setState(() => (
-                        {searchBooks}
-                    ));
+                    if (Array.isArray(searchBooks)) {
+                        this.setState(() => (
+                            {searchBooks}
+                        )) 
+                    }
+                    else {
+                        // Search result error
+                        this.setState(() => (
+                            {searchBooks : []}
+                        ));
+                    }
                 }).catch(() => {
                     //In case of search error result, set an empty books array result.
                     console.log('search catch');
@@ -56,7 +64,7 @@ export default class Search extends React.Component {
         // look for search book on shelf and put thier data.
         // If the book not on shelf leave its data as got it from search.
         let searchBookWithShelfDataArr = [];
-        this.state.searchBooks.forEach (searchBookItemObj => {
+        (this.state.searchBooks||[]).forEach (searchBookItemObj => {
             if (searchBookItemObj && searchBookItemObj.id !== undefined &&
                 bookOnShelfIdToBookObj[searchBookItemObj.id] !== undefined && bookOnShelfIdToBookObj[searchBookItemObj.id].shelf) {
                     searchBookWithShelfDataArr.push(bookOnShelfIdToBookObj[searchBookItemObj.id]);
@@ -69,8 +77,6 @@ export default class Search extends React.Component {
     }
 
     render() {
-        console.log('Search state');
-        console.log(this.state);
         return (
             <div className="search-books">
                 <div className="search-books-bar">
