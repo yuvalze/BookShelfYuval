@@ -18,6 +18,7 @@ export default class Search extends React.Component {
     
     componentDidUpdate(prevProps, prevState) {
         if (prevState.textQuery !== this.state.textQuery) {
+            //In case the input text is empty, set an empty books array result.
             if (!this.state.textQuery) {
                 this.setState(() => (
                     {searchBooks : []}
@@ -30,6 +31,7 @@ export default class Search extends React.Component {
                         {searchBooks}
                     ));
                 }).catch(() => {
+                    //In case of search error result, set an empty books array result.
                     console.log('search catch');
                     this.setState(() => (
                         {searchBooks : []}
@@ -37,6 +39,33 @@ export default class Search extends React.Component {
                 })
             }
         }
+    }
+
+    /*
+     Return Search array with their data on shelf.
+    */
+    getSearchBookWithShelfData () {
+        // Set the book on shelf to key value object.
+        const bookOnShelfIdToBookObj = {};
+        (this.props.booksOnShelfArr || []).forEach(bookItemObj => {
+            if (bookItemObj && bookItemObj.id) {
+                bookOnShelfIdToBookObj[bookItemObj.id] = bookItemObj;
+            }
+        });
+
+        // look for search book on shelf and put thier data.
+        // If the book not on shelf leave its data as got it from search.
+        let searchBookWithShelfDataArr = [];
+        this.state.searchBooks.forEach (searchBookItemObj => {
+            if (searchBookItemObj && searchBookItemObj.id !== undefined &&
+                bookOnShelfIdToBookObj[searchBookItemObj.id] !== undefined && bookOnShelfIdToBookObj[searchBookItemObj.id].shelf) {
+                    searchBookWithShelfDataArr.push(bookOnShelfIdToBookObj[searchBookItemObj.id]);
+            }
+            else {
+                searchBookWithShelfDataArr.push(searchBookItemObj);
+            }  
+        })
+        return searchBookWithShelfDataArr;
     }
 
     render() {
@@ -66,7 +95,7 @@ export default class Search extends React.Component {
                 </div>
                 <div className="search-books-results">
                     <BookShelf 
-                        booksArr={this.state.searchBooks}
+                        booksArr={this.getSearchBookWithShelfData ()}
                         updateBookShelf={this.props.updateBookShelf}/>
                 </div>
             </div>
@@ -75,5 +104,6 @@ export default class Search extends React.Component {
 }
 
 Search.propTypes = {
-    updateBookShelf : PropTypes.func.isRequired
+    updateBookShelf : PropTypes.func.isRequired,
+    booksOnShelfArr : PropTypes.array.isRequired
 }

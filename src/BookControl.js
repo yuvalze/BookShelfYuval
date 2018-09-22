@@ -5,7 +5,7 @@ import './App.css'
 export default function BookControl (props) {
         return (     
         <div className="book-shelf-changer">
-            <select value={props.shelfValue} onChange={props.updateBookShelfControl}>
+            <select value={props.shelfValue || "none"} onChange={props.updateBookShelfControl}>
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>

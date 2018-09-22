@@ -9,10 +9,10 @@ export default class BooksShelf extends React.Component {
       <div className="bookshelf-books">
         <ol className="books-grid">
         {Array.isArray(this.props.booksArr) &&
-        (this.props.booksArr).map((oneBook, index) => 
-          <li key={index}>
+        (this.props.booksArr).map(oneBookObj => 
+          <li key={oneBookObj.id}>
             <BookItem 
-              oneBookObjData = {oneBook}
+              oneBookObjData = {oneBookObj}
               updateBookShelf={this.props.updateBookShelf}/>
           </li>)}
         </ol>
