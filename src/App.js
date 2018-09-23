@@ -9,32 +9,40 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    allBooks: []
+    allBooks: [], // the result of all books on the shelf.
+    textSearchQuery : '' // in order to keep the text queury across navigation. 
   }
 
   constructor() {
     super();
     this.updateBookShelf = this.updateBookShelf.bind(this);
+    this.updateSearchTextQueryState = this.updateSearchTextQueryState.bind(this);
     console.log('App constructor');
   }
 
   componentDidMount() {
     BooksAPI.getAll()
       .then(allBooks => {
-        this.setState(() => ({
-          allBooks
-        }));
+        this.setState(() => (
+          {allBooks}
+        ));
       });
   }
 
   updateBookShelf(oneBookObjData, shelfValue) {
     BooksAPI.update(oneBookObjData, shelfValue).then(() =>
       BooksAPI.getAll().then(allBooks => {
-        this.setState(() => ({
-          allBooks
-        }));
+        this.setState(() => (
+          {allBooks}
+        ));
       })
     )
+  }
+
+  updateSearchTextQueryState(textSearchQuery) {
+    this.setState(() => (
+      {textSearchQuery}
+    ))
   }
 
   render() {
@@ -44,7 +52,9 @@ class BooksApp extends React.Component {
             <Route exact path="/search" render={() => (
               <Search 
                 booksOnShelfArr = {this.state.allBooks}
-                updateBookShelf = {this.updateBookShelf}/>
+                updateBookShelf = {this.updateBookShelf}
+                textSearchQuery = {this.state.textSearchQuery}
+                updateTextQueryState = {this.updateSearchTextQueryState}/>
             )}/>
             <Route exact path="/" render={() => (
               <div className="list-books">

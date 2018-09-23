@@ -7,7 +7,6 @@ import './App.css'
 
 export default class Search extends React.Component {
     state = {
-        textQuery : '',
         searchBooks : []
     }
 
@@ -16,16 +15,24 @@ export default class Search extends React.Component {
         console.log('Search constructor');
     }
     
+    componentDidMount() {
+        this.setBookSearchResult(''); // pass an empty string as previous text query, in order to get the qeury if text query exists.
+    }
+
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.textQuery !== this.state.textQuery) {
+        this.setBookSearchResult(prevProps.textSearchQuery);
+    }
+
+    setBookSearchResult(prevSearchQuery) {
+        if (prevSearchQuery !== this.props.textSearchQuery) {
             //In case the input text is empty, set an empty books array result.
-            if (!this.state.textQuery) {
+            if (!this.props.textSearchQuery) {
                 this.setState(() => (
                     {searchBooks : []}
                 ));
             }
             else {
-                BooksAPI.search(this.state.textQuery)
+                BooksAPI.search(this.props.textSearchQuery)
                 .then(searchBooks => {
                     if (Array.isArray(searchBooks)) {
                         this.setState(() => (
@@ -92,10 +99,10 @@ export default class Search extends React.Component {
                     */}
                         <input 
                             type="text" 
-                            value={this.state.textQuery}
+                            value={this.props.textSearchQuery}
                             placeholder="Search by title or author"
                             onChange={event => {
-                                this.setState({textQuery : event.target.value})
+                                this.props.updateTextQueryState(event.target.value)
                             }}/>
                     </div>
                 </div>
@@ -110,6 +117,8 @@ export default class Search extends React.Component {
 }
 
 Search.propTypes = {
-    updateBookShelf : PropTypes.func.isRequired,
-    booksOnShelfArr : PropTypes.array.isRequired
+    updateBookShelf : PropTypes.func.isRequired, // update the book shelf function
+    updateTextQueryState : PropTypes.func.isRequired, // function to update the text qeury state.
+    booksOnShelfArr : PropTypes.array.isRequired, // array data of the books on shelf
+    textSearchQuery : PropTypes.string // text to search, it store on the parents in order to keep the value across navigation.
 }
