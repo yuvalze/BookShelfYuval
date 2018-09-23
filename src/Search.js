@@ -10,11 +10,6 @@ export default class Search extends React.Component {
         searchBooks : []
     }
 
-    constructor() {
-        super();
-        console.log('Search constructor');
-    }
-    
     componentDidMount() {
         this.setBookSearchResult(''); // pass an empty string as previous text query, in order to get the qeury if text query exists.
     }
@@ -47,7 +42,6 @@ export default class Search extends React.Component {
                     }
                 }).catch(() => {
                     //In case of search error result, set an empty books array result.
-                    console.log('search catch');
                     this.setState(() => (
                         {searchBooks : []}
                     ));

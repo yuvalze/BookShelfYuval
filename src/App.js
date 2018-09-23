@@ -17,7 +17,6 @@ class BooksApp extends React.Component {
     super();
     this.updateBookShelf = this.updateBookShelf.bind(this);
     this.updateSearchTextQueryState = this.updateSearchTextQueryState.bind(this);
-    console.log('App constructor');
   }
 
   componentDidMount() {
