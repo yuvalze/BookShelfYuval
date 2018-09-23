@@ -22,7 +22,14 @@ To get started developing right away:
 │   └── index.html # DO NOT MODIFY
 └── src
     ├── App.css # Styles for your app. Feel free to customize this as you desire.
-    ├── App.js # This is the root of your app. Contains static HTML right now.
+    ├── App.js # This is the root of the app. Contains Route between 'Search' and 'My Read'.
+    ├── BookControl.js # Stateless component function, which is a control that lets you add the book to your library.
+    ├── BookItem.js # Display one book with control and has callback, which update the book shelf.
+    ├── BookShelf.js # Stateless component function, which Display the books on type of shelf or the books on search result.
+    ├── CurrentlyRead.js # Stateless component function, which Display the books on CurrentlyRead shelf.
+    ├── Read.js # Stateless component function, which Display the books on Read shelf.
+    ├── WantToRead.js # Stateless component function, which Display the books on WantToRead shelf.
+    ├── Search.js # Get and display the searched books according the the text qeury.
     ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
     ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
     ├── icons # Helpful images for your app. Use at your discretion.

@@ -3,25 +3,23 @@ import PropTypes from 'prop-types'
 import BookItem from './BookItem'
 import './App.css'
 
-export default class BooksShelf extends React.Component {
-    render () {
-      return (
-      <div className="bookshelf-books">
-        <ol className="books-grid">
-        {Array.isArray(this.props.booksArr) &&
-        (this.props.booksArr).map(oneBookObj => 
-          <li key={oneBookObj.id}>
-            <BookItem 
-              oneBookObjData = {oneBookObj}
-              updateBookShelf={this.props.updateBookShelf}/>
-          </li>)}
-        </ol>
-      </div>
-      )
-    }
+export default function BookShelf (props) {
+  return ( 
+    <div className="bookshelf-books">
+      <ol className="books-grid">
+      {Array.isArray(props.booksArr) &&
+      (props.booksArr).map(oneBookObj => 
+        <li key={oneBookObj.id}>
+          <BookItem 
+            oneBookObjData = {oneBookObj}
+            updateBookShelf={props.updateBookShelf}/>
+        </li>)}
+      </ol>
+    </div>
+    )
 }
 
-BooksShelf.propType = {
+BookShelf.propType = {
   booksArr : PropTypes.array.isRequired,
   updateBookShelf : PropTypes.func.isRequired
 }
