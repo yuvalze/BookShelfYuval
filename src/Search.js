@@ -24,29 +24,29 @@ export default class Search extends React.Component {
         if (prevSearchQuery !== this.props.textSearchQuery) {
             //In case the input text is empty, set an empty books array result.
             if (!this.props.textSearchQuery) {
-                this.setState(() => (
+                this.setState(
                     {searchBooks : []}
-                ));
+                );
             }
             else {
                 BooksAPI.search(this.props.textSearchQuery)
                 .then(searchBooks => {
                     if (Array.isArray(searchBooks)) {
-                        this.setState(() => (
+                        this.setState(
                             {searchBooks}
-                        )) 
+                        ) 
                     }
                     else {
                         // Search result error
-                        this.setState(() => (
+                        this.setState(
                             {searchBooks : []}
-                        ));
+                        );
                     }
                 }).catch(() => {
                     //In case of search error result, set an empty books array result.
-                    this.setState(() => (
+                    this.setState(
                         {searchBooks : []}
-                    ));
+                    );
                 })
             }
         }
