@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import BookShelf from './BookShelf'
+import debounce from 'lodash/debounce'; // use debounce from lodash
 import './App.css'
 
 export default class Search extends React.Component {
@@ -12,6 +13,7 @@ export default class Search extends React.Component {
 
     componentDidMount() {
         this.setBookSearchResult(''); // pass an empty string as previous text query, in order to get the qeury if text query exists.
+        this.setBookSearchResult = debounce(this.setBookSearchResult, 500);
     }
 
     componentDidUpdate(prevProps, prevState) {
